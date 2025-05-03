@@ -313,13 +313,21 @@ const RoadmapFormDialog = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const slug = title.toLowerCase().replace(/\s+/g, "-");
+
+    // Create URL search parameters
+    const searchParams = new URLSearchParams({
+      title: title,
+      description: description,
+      level: level,
+      duration: duration,
+    });
 
     const newRoadmap: Roadmap = {
       title,
       description,
       iconName,
-      path: `/roadmaps/${slug}`,
+      // Update the path to include search parameters
+      path: `/roadmap?${searchParams.toString()}`,
       level,
       duration,
       isNew,
